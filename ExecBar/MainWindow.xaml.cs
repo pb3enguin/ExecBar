@@ -16,6 +16,7 @@ namespace ExecBar
         private List<ActionItem> actions;
         private static IKeyboardMouseEvents globalHook;
         private const string ActionsFilePath = "actions.json";
+        private bool launchedViaHotkey = false; // Flag to track hotkey launch
 
         public MainWindow()
         {
@@ -58,6 +59,7 @@ namespace ExecBar
         {
             if (e.Control && e.KeyCode == System.Windows.Forms.Keys.Space)
             {
+                launchedViaHotkey = true; // Set flag to true when launched via hotkey
                 if (this.Visibility != Visibility.Visible)
                 {
                     this.Show();
@@ -69,6 +71,14 @@ namespace ExecBar
 
         private void InputTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
         {
+            if (launchedViaHotkey && e.Key == Key.Space)
+            {
+                // Ignore the space key event triggered by Ctrl+Space
+                e.Handled = true;
+                launchedViaHotkey = false; // Reset the flag after handling
+                return;
+            }
+
             if (e.Key == Key.Escape)
             {
                 this.Hide();
