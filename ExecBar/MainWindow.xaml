@@ -1,7 +1,8 @@
 ﻿<Window x:Class="ExecBar.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="ExecBar" Height="350" Width="525">
+        Title="ExecBar" Height="350" Width="525"
+        Icon="rocket_icon-icons.com_54375.ico">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

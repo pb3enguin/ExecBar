@@ -6,10 +6,24 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <StartupObject></StartupObject>
+    <ApplicationIcon>rocket_icon-icons.com_54375.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="App.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="rocket_icon-icons.com_54375.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MouseKeyHook" Version="5.7.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="rocket_icon-icons.com_54375.ico" />
   </ItemGroup>
 
 </Project>
