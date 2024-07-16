@@ -137,19 +137,32 @@ namespace ExecBar
 
         private void ExecuteAction(ActionItem action)
         {
-            if (Directory.Exists(action.Path))
+            try
             {
-                Process.Start("explorer.exe", action.Path);
+                if (Directory.Exists(action.Path))
+                {
+                    Process.Start("explorer.exe", action.Path);
+                }
+                else if (File.Exists(action.Path))
+                {
+                    Process.Start(new ProcessStartInfo(action.Path) { UseShellExecute = true });
+                }
+                else
+                {
+                    throw new FileNotFoundException("The specified file or folder does not exist.");
+                }
             }
-            else if (File.Exists(action.Path))
+            catch (Exception ex)
             {
-                Process.Start(new ProcessStartInfo(action.Path) { UseShellExecute = true });
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            else
+            finally
             {
-                Process.Start(new ProcessStartInfo(action.Path) { UseShellExecute = true });
+                // Clear the input text after executing the action
+                InputTextBox.Text = string.Empty;
+                SuggestionsListBox.ItemsSource = null;
+                this.Hide();
             }
-            this.Hide();
         }
 
         private void SuggestionsListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
